@@ -438,6 +438,45 @@ article .icon {
   border-color: rgb(163, 163, 163);
 }
 
+/* GALLERY SECTION */
+.gallery{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 100%; /* Allow it to adjust with the screen size */
+  margin: 0 auto; /* Center the gallery horizontally */
+  padding: 0rem; /* Optional: Adds some padding around the gallery */
+  flex-wrap: wrap; /* Adjusts the layout for smaller screens */
+  margin-bottom: 3rem;
+}
+
+.card{
+  position: relative;
+  left: 0;
+  width: 9rem;
+  border-radius: 5rem;
+
+  height: 25rem;
+  overflow: hidden;
+  transition: .4s ease-in-out;
+
+  box-shadow: 0 5 12px rgba(0, 0, 0, .3);
+  flex: .15;
+}
+
+.card img{
+  position: relative;
+  height: 25rem;
+  object-fit: cover;
+}
+
+.card:hover{
+  flex: 1 1 0;
+  cursor: pointer;
+  border-radius: 1rem;
+}
+/* END OF GALLERY SECTION */
+
 /* CONTACT */
 
 #contact {
