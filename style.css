@@ -9,6 +9,7 @@
 
 body {
   font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
 }
 
 html {
@@ -71,12 +72,40 @@ nav,
   display: flex;
 }
 
+/* KeyFrames */
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+}
+
+@keyframes fade-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-90px) scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+
+}
+
 nav {
   font-family: "Outfit", sans-serif;
   font-weight: 650;
   justify-content: space-around;
   align-items: center;
   height: 19vh;
+  animation: fade-down 0.5s 0.4s backwards;
 }
 
 .nav-links {
@@ -90,6 +119,7 @@ a {
   color: black;
   text-decoration: none;
   text-decoration-color: white;
+  animation: fade-down 0.5s 0.4s backwards;
 }
 
 a:hover {
@@ -107,6 +137,7 @@ a:hover {
   margin-top: 20px;
   height: 200px;
   width: auto;
+  animation: fade-down 0.5s 0.4s backwards;
 }
 
 .logo:hover {
@@ -223,6 +254,7 @@ section {
   height: 400px;
   width: 400px;
   margin: auto 0;
+  animation: fade-up 1s 0.4s; 
 }
 
 .section__text {
@@ -236,15 +268,28 @@ section {
 
 .section__text__p1 {
   text-align: center;
+  animation: fade-up 0.5s 0.4s;
 }
 
 .section__text__p2 {
   font-size: 1.75rem;
   margin-bottom: 1rem;
+  animation: fade-up 0.5s 0.4s;
+}
+
+.landing_title {
+  font-size: 6rem;
+  text-align: center;
+  background: #121FCF;
+  background: linear-gradient(to right, #F857A6 0%, #FFDF5E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fade-up 1s 0.4s;
+
 }
 
 .title {
-  font-size: 3rem;
+  font-size: 7rem;
   text-align: center;
   background: #121FCF;
   background: linear-gradient(to right, #F857A6 0%, #FFDF5E 100%);
