@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Me | Portfolio</title> <!-- Specific Title -->
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="icon" type="image/x-icon" href="/assets/ZILD LOGOs.svg">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+    <!-- START: Navigation Block -->
+    <nav id="desktop-nav">
+        <div class="logo">
+            <a href="landing.html"><img src="/assets/1.svg" alt="Logo" class="logo-img"></a>
+        </div>
+        <div>
+            <ul class="nav-links">
+                <li><a href="landing.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="aboutme.html" class="nav-link-about">About</a>
+                    <ul class="dropdown-content">
+                        <li><a href="aboutme.html">About Me</a></li>
+                        <li><a href="relevantinfo.html">Relevant Information</a></li>
+                        <li><a href="challenges.html">Challenges and Learnings</a></li>
+                        <li><a href="realme.html" class="nav-link-glitch" data-text="The Real Me">The Real Me</a></li>
+                        <li><a href="family.html">Family Background</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="digitalproject.html" class="nav-link-about">Projects</a>
+                    <ul class="dropdown-content">
+                        <li><a href="digitalproject.html">Digital Art</a></li>
+                        <li><a href="programmingproj.html">Programming Projects</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="contact.html" class="nav-link-about">Contact</a>
+                    <ul class="dropdown-content">
+                        <li><a href="contact.html">Contact Me</a></li>
+                        <li><a href="resume.html">Resume</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <nav id="hamburger-nav">
+         <div class="logo">
+            <a href="landing.html"><img src="/assets/1.svg" alt="Logo" class="logo-img"></a>
+        </div>
+        <div class="hamburger-menu">
+             <!-- onclick is removed, handled by JS -->
+            <div class="hamburger-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu-links">
+                 <!-- onclick is removed, handled by JS -->
+                <li><a href="landing.html">Home</a></li>
+                <li><a href="aboutme.html">About</a></li>
+                <li><a href="digitalproject.html">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="resume.html">Resume</a></li>
+            </div>
+        </div>
+    </nav>
+    <!-- END: Navigation Block -->
+
+    <section id="about">
+        <div class="section-content-wrapper">
+            <h1 class="title">About Me</h1>
+            <div class="section-container about-section-container">
+                <div class="about-details-container">
+                    <div class="about-containers">
+                        <!-- Experience Box with Trigger ID -->
+                        <div id="experience-box-trigger" class="details-container">
+                            <img src="/assets/experience.png" alt="Experience icon" class="icon"/>
+                            <h3>Experience</h3>
+                            <p>SPES Worker <br />Graphic Design</p>
+                        </div>
+
+                        <!-- Education Box with Trigger ID -->
+                        <div id="education-box-trigger" class="details-container">
+                            <img src="/assets/education.png" alt="Education icon" class="icon"/>
+                            <h3>Education</h3>
+                            <p>B.S in Computer Science<br /> 2021 - Present</p>
+                        </div>
+                    </div>
+                    <div class="text-container">
+                        <p>
+                            Hey there! I'm a passionate student software developer and graphic designer with a strong focus on frontend development.
+                            On the graphic design side, I create content that’s visually appealing and effective in communicating messages clearly and creatively.
+                            I primarily use Canva and Photopea, allowing me to quickly turn concepts into designs that are both polished and impactful. <br> <br>
+                            In programming, I'm well-versed in HTML and CSS for building and styling web pages, as well as Python for more in-depth, backend logic.
+                            My goal is to merge my technical skills with my design eye to build interfaces that feel intuitive, clean, and aesthetically pleasing.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === START: Education Modal HTML === -->
+    <div id="education-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="modal-close-btn">×</span>
+            <div class="modal-slides-container">
+                <div class="modal-slide" data-slide-index="1">
+                    <div class="modal-image-container">
+                        <img src="/assets/Vergon.jpg" alt="Elementary Education">
+                    </div>
+                    <div class="modal-text-container">
+                        <h2>Elementary Education</h2>
+                        <p>
+                            Completed elementary education at Vergonville Elementary School in Year 2012. Developed foundational skills and discovered an early interest in Technology. Achieved 10th overall rank in school.
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-slide" data-slide-index="2">
+                     <div class="modal-image-container">
+                        <img src="/assets/ACE.jpg" alt="High School Education">
+                    </div>
+                    <div class="modal-text-container">
+                        <h2>High School Education</h2>
+                        <p>
+                            Graduated from Academy for Christian Education in Year 2016. Excelled as Salutatorian of class. Class President, Cadet Officer, and Rifle Guard.
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-slide" data-slide-index="3">
+                     <div class="modal-image-container">
+                        <img src="/assets/SHS.jpg" alt="Senior High Education">
+                    </div>
+                    <div class="modal-text-container">
+                        <h2>Senior High Education</h2>
+                        <p>
+                            Graduated from SHS in San Nicholas 3, Bacoor Cavite in 2021. Specialized in the TVL-ICT strand. Excelled in subjects MIL, Oral Comm., and UCSP.</p>
+                    </div>
+                </div>
+                <div class="modal-slide" data-slide-index="4">
+                    <div class="modal-image-container">
+                       <img src="/assets/CVSU.jpg" alt="College Education">
+                   </div>
+                   <div class="modal-text-container">
+                       <h2>College Education</h2>
+                       <p>
+                           Currently pursuing a Bachelor of Science in Computer Science at Cavite State University - Bacoor Campus (2021 - Present). Focusing on software development, data structures, and web technologies.
+                       </p>
+                   </div>
+               </div>
+            </div>
+            <button class="modal-arrow modal-prev-btn"><</button>
+            <button class="modal-arrow modal-next-btn">></button>
+        </div>
+    </div>
+    <!-- === END: Education Modal HTML === -->
+
+    <!-- === START: Experience Modal HTML === -->
+    <div id="experience-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="modal-close-btn">×</span>
+            <div class="modal-slides-container">
+                <div class="modal-slide" data-slide-index="1">
+                    <div class="modal-image-container">
+                        <img src="/assets/acs.svg" alt="Graphic Design Experience">
+                    </div>
+                    <div class="modal-text-container">
+                        <h2>Freelance Graphic Design</h2>
+                        <p>
+                            (2023 - 2024) Specialized in creating pubmat content, infographics, video editing, and poster designs for various clients. Focused on delivering visually compelling and brand-consistent materials across digital and print platforms, meeting tight deadlines.
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-slide" data-slide-index="2">
+                     <div class="modal-image-container">
+                        <img src="/assets/spes.jpg" alt="SPES Worker Experience">
+                    </div>
+                    <div class="modal-text-container">
+                        <h2>SPES Worker - HOR Cong. Lani M. Revilla</h2>
+                        <p>
+                            (July 2024 - Sep 2024) Efficiently crossmatched records daily. Conducted in-depth interviews demonstrating strong communication. Field deployed to cash assistance events, aiding 1,000-2,500 victims and facilitating aid distribution. Collaborated with team members under tight deadlines.
+                        </p>
+                    </div>
+                </div>
+                 <!-- Add more slides if needed -->
+            </div>
+            <button class="modal-arrow modal-prev-btn"><</button>
+            <button class="modal-arrow modal-next-btn">></button>
+        </div>
+    </div>
+    <!-- === END: Experience Modal HTML === -->
+
+    <!-- FOOTER -->
+    <footer>
+      <p>Copyright © 2024 Z. All Rights Reserved.</p>
+    </footer>
+
+    <script type="module" src="/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zildjian Bermas | Portfolio</title>
+    <link rel="stylesheet" href="/style.css" />
+    <!-- <link rel="stylesheet" href="mediaqueries.css" /> -->
+    <link rel="icon" type="image/x-icon" href="/assets/ZILD LOGOs.svg">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+    <!-- NAV -->
+    <nav id="desktop-nav">
+        <div class="logo">
+            <a href="landing.html"><img src="/assets/1.svg" alt="Logo" class="logo-img"></a>
+        </div>
+        <div>
+            <ul class="nav-links">
+                <li><a href="landing.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="aboutme.html" class="nav-link-about">About</a>
+                    <ul class="dropdown-content">
+                        <li><a href="aboutme.html">About Me</a></li>
+                        <li><a href="relevantinfo.html">Relevant Information</a></li>
+                        <li><a href="challenges.html">Challenges and Learnings</a></li>
+                        <li><a href="realme.html" class="nav-link-glitch" data-text="The Real Me">The Real Me</a></li>
+                        <li><a href="family.html">Family Background</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="digitalproject.html" class="nav-link-about">Projects</a>
+                    <ul class="dropdown-content">
+                        <li><a href="digitalproject.html">Digital Art</a></li>
+                        <li><a href="programmingproj.html">Programming Projects</a></li>
+                        <li><a href="futureplans.html">Future Plans</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="contact.html" class="nav-link-about">Contact</a>
+                    <ul class="dropdown-content">
+                        <li><a href="contact.html">Contact Me</a></li>
+                        <li><a href="resume.html">Resume</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <nav id="hamburger-nav">
+         <div class="logo">
+            <a href="landing.html"><img src="/assets/1.svg" alt="Logo" class="logo-img"></a>
+        </div>
+        <div class="hamburger-menu">
+            <div class="hamburger-icon" >
+                <span></span><span></span><span></span>
+            </div>
+            <div class="menu-links">
+                <li><a href="landing.html" >Home</a></li>
+                <li><a href="aboutme.html" >About</a></li>
+                <li><a href="digitalproject.html" >Projects</a></li>
+                <li><a href="contact.html" >Contact</a></li>
+                 <li><a href="/assets/Zildjian_Bermas_CV.pdf" target="_blank" >Resume</a></li>
+            </div>
+        </div>
+    </nav>
+    <!-- END Nav -->
+
+    <section id="profile">
+        <div class="section-content-wrapper">
+            <div class="section__text">
+                <p class="section__text__p1">Hey there! I'm</p>
+
+                <!-- === ADD PROFILE PICTURE HERE === -->
+                <img src="/assets/zie.jpg"
+                     alt="Photo of Zildjian Bermas"
+                     class="profile-pic">
+                <!-- === END PROFILE PICTURE === -->
+
+                <h1 class="landing_title">Zildjian Bermas</h1>
+                <p class="section__text__p2">Frontend Developer / Graphic Designer</p>
+                <div class="btn-container">
+                    <button class="btn btn-color-2" onclick="location.href='resume.html'">
+                        Download CV
+                    </button>
+                    <button class="btn btn-color-1" onclick="location.href='contact.html'">
+                        Contact Info
+                    </button>
+                </div>
+                <div id="socials-container">
+                    <img src="/assets/linkedin.png" alt="My LinkedIn profile" class="icon" onclick="location.href='https://www.linkedin.com/in/zildjian-bermas-9450b0333/'"/>
+                    <img src="/assets/github.png" alt="My Github profile" class="icon" onclick="location.href='https://github.com/ZildjianBermas'"/>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>Copyright © 2024 Z. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

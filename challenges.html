@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Challenges | Portfolio</title> <!-- Updated title -->
+    <link rel="stylesheet" href="/style.css" />
+    <!-- <link rel="stylesheet" href="mediaqueries.css" /> --> <!-- Assuming combined -->
+    <link rel="icon" type="image/x-icon" href="/assets/ZILD LOGOs.svg">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+    <!-- NAV (Keep as is) -->
+    <nav id="desktop-nav">
+        <div class="logo">
+            <a href="landing.html"><img src="/assets/1.svg" alt="Logo" class="logo-img"></a>
+        </div>
+        <div>
+            <ul class="nav-links">
+                <li><a href="landing.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="aboutme.html" class="nav-link-about">About</a>
+                    <ul class="dropdown-content">
+                        <li><a href="aboutme.html">About Me</a></li>
+                        <li><a href="relevantinfo.html">Relevant Information</a></li>
+                        <li><a href="challenges.html">Challenges and Learnings</a></li>
+                        <li><a href="realme.html" class="nav-link-glitch" data-text="The Real Me">The Real Me</a></li>                       
+                        <li><a href="family.html">Family Background</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="digitalproject.html" class="nav-link-about">Projects</a>
+                    <ul class="dropdown-content">
+                        <li><a href="digitalproject.html">Digital Art</a></li>
+                        <li><a href="programmingproj.html">Programming Projects</a></li>
+                        <li><a href="programmingproj.html">Future Plans</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="contact.html" class="nav-link-about">Contact</a>
+                    <ul class="dropdown-content">
+                        <li><a href="contact.html">Contact Me</a></li>
+                        <li><a href="resume.html" target="_blank">Resume</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <nav id="hamburger-nav">
+         <div class="logo">
+            <a href="landing.html"><img src="/assets/1.svg" alt="Logo" class="logo-img"></a>
+        </div>
+        <div class="hamburger-menu">
+            <div class="hamburger-icon" >
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu-links">
+                <li><a href="landing.html" >Home</a></li>
+                <li><a href="aboutme.html" >About</a></li>
+                <li><a href="digitalproject.html" >Projects</a></li>
+                <li><a href="contact.html" >Contact</a></li>
+                <li><a href="./assets/Zildjian_Bermas_CV.pdf" target="_blank" >Resume</a></li>
+            </div>
+        </div>
+    </nav>
+    <!-- END Nav -->
+   <!-- Challenges & Learnings Section -->
+   <section id="challenges">
+    <div class="section-content-wrapper">
+        <h1 class="title">Challenges & Learnings</h1>
+
+        <p class="challenges-intro-text">
+            Every project and experience comes with its hurdles. Click on a challenge below to see the key lessons I've taken away, shaping my approach to development and design.
+        </p>
+
+        <!-- Container for the trigger boxes -->
+        <div class="challenge-grid-container">
+
+            <!-- Trigger Box 1 -->
+            <div class="challenge-box" data-modal-target="leisure">
+                <h3>Finding Work and Leisure Balance</h3>
+            </div>
+
+            <!-- Trigger Box 2 -->
+            <div class="challenge-box" data-modal-target="tight-deadlines">
+                 <h3>Tight Project Deadlines</h3>
+            </div>
+
+            <!-- Trigger Box 3 -->
+            <div class="challenge-box" data-modal-target="student">
+                <h3>Student Learning Curve</h3>
+            </div>
+
+             <!-- Trigger Box 4 -->
+             <div class="challenge-box" data-modal-target="vague-feedback">
+                <h3>Interpreting Vague Feedback</h3>
+            </div>
+
+            <!-- Add more trigger boxes as needed, ensure unique data-modal-target -->
+
+        </div> <!-- End challenge-grid-container -->
+    </div> <!-- End section-content-wrapper -->
+</section>
+
+<!-- === SINGLE Modal Structure (Initially Hidden & Empty) === -->
+<!-- ID changed to reflect general purpose -->
+<div id="challenge-detail-modal" class="modal-overlay">
+    <div class="modal-content challenge-modal-content"> 
+        <span class="modal-close-btn">×</span>
+
+   
+         <div class="modal-image-container" id="challenge-modal-image-container">
+            <img src="" alt="Challenge Image" id="challenge-modal-image">
+        </div>
+        <div class="modal-text-container" id="challenge-modal-text-container">
+            <h2 id="challenge-modal-title"></h2>
+            <div id="challenge-modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- === END Modal Structure === -->
+
+    <!-- FOOTER -->
+    <footer>
+      <p>Copyright © 2024 Z. All Rights Reserved.</p>
+    </footer>
+
+    <script type="module" src="/script.js"></script>
+</body>
+</html>

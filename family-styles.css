@@ -1,0 +1,237 @@
+/* --- START OF FILE family-styles.css --- */
+
+/* --- FAMILY TREE STYLES --- */
+
+/* Main container */
+.family-tree-container {
+    width: 100%;
+    max-width: 1200px; /* Adjust as needed */
+    margin: 2rem auto;
+    overflow-x: auto; /* Allow horizontal scrolling on small screens */
+    padding: 1rem;
+    text-align: center; /* Center the top-level node */
+    /* Prevent text selection during interaction */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+/* Basic UL setup - No flex here */
+.family-tree-container ul {
+    padding-top: 20px;
+    position: relative; /* Crucial for line positioning */
+    list-style-type: none;
+    margin: 0;
+    padding-left: 0;
+    /* White space is needed between inline-table elements */
+    white-space: nowrap; /* Prevent wrapping of LIs */
+}
+/* Ensure nested ULs behave correctly */
+.family-tree-container ul ul {
+    padding-top: 20px;
+    display: block; /* Nested ULs take full width relative to parent LI */
+     white-space: normal; /* Allow children LIs to wrap if needed within parent */
+}
+
+/* Use inline-table for LI layout */
+.family-tree-container li {
+    display: inline-table; /* Restore original layout basis */
+    text-align: center;
+    list-style-type: none;
+    position: relative;
+    padding: 20px 5px 0 5px;
+    transition: all 0.5s;
+    vertical-align: top; /* Align items to the top */
+}
+
+/* --- Connecting Lines (Based on inline-table) --- */
+
+/* Draw standard top connector halves and vertical stem */
+.family-tree-container li::before,
+.family-tree-container li::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 50%;
+    border-top: 1.5px solid #ccc;
+    width: 50%;
+    height: 20px; /* Should match ul padding-top */
+    z-index: 0;
+}
+.family-tree-container li::after {
+    right: auto;
+    left: 50%;
+    border-left: 1.5px solid #ccc;
+}
+
+/* Remove connector lines if only one child */
+.family-tree-container li:only-child::after,
+.family-tree-container li:only-child::before {
+    display: none;
+}
+
+/* Hide horizontal connector part for the first child */
+.family-tree-container li:first-child::before {
+    border: 0 none;
+}
+/* Hide horizontal connector part for the last child */
+.family-tree-container li:last-child::after {
+    border: 0 none;
+}
+/* Add incoming curve for the last child */
+.family-tree-container li:last-child::before {
+    border-right: 1.5px solid #ccc;
+    border-radius: 0 5px 0 0;
+}
+/* Add incoming curve for the first child */
+.family-tree-container li:first-child::after {
+    border-radius: 5px 0 0 0;
+}
+
+/* --- Specific Connectors for Parents/Siblings --- */
+
+/* Horizontal line connector between parents */
+/* Targets the UL containing the parent LIs */
+.family-tree-container ul > li > ul::before { /* Draws the line between Dad & Mom */
+    content: '';
+    position: absolute;
+    top: 20px; /* Aligns with li padding-top */
+    left: 25%; /* Starts at center of first parent LI */
+    width: 50%; /* Spans between centers of two parent LIs */
+    height: 0;
+    border-top: 1.5px solid #ccc;
+    z-index: 0;
+    /* !! Fine-tune left/width percentages with dev tools if needed !! */
+}
+
+/* Vertical connector FROM the horizontal parent line DOWN towards siblings */
+/* Targets the UL containing the parent LIs */
+.family-tree-container ul > li > ul::after { /* Draws the drop-down from the parent connector line */
+    content: '';
+    position: absolute;
+    top: 20px; /* Starts where the horizontal line is */
+    left: 50%; /* Center of the parent UL */
+    width: 0;
+    height: 20px; /* Matches the sibling group's padding-top */
+    border-left: 1.5px solid #ccc;
+    z-index: 0;
+}
+
+
+/* Vertical connector for the SIBLING group */
+/* This connects the siblings UL to the vertical line dropping from the parents */
+.family-tree-container ul .sibling-group::before {
+    content: '';
+    position: absolute;
+    top: 0; /* Start from the top padding area */
+    left: 50%; /* Center relative to the sibling group UL's parent LI (Mom) */
+    /* No horizontal transform needed now - connects directly to parent drop-down line */
+    /* transform: translateX(-50%); */ /* REMOVED */
+    border-left: 1.5px solid #ccc;
+    width: 0;
+    height: 20px; /* Match sibling UL padding-top */
+    z-index: 0;
+}
+
+/* --- Hide Conflicting/Unnecessary Default Lines --- */
+
+/* Hide the default vertical connector for any UL directly under a parent LI */
+/* (We replaced this with the specific parent connector above) */
+.family-tree-container ul > li > ul > li::after {
+     /* This refers to the vertical stem of Dad/Mom nodes - hide it */
+     /* border-left: none; */ /* Let's keep this for now */
+}
+/* Hide the default connector for the UL containing the PARENTS */
+.family-tree-container ul > li > ul:first-child::before {
+     /* Prevent the standard UL>LI connector rule applying here */
+     /* border-top: none; */ /* Might need this, test first */
+}
+
+/* Hide the default vertical connector stem for the SIBLING GROUP UL itself */
+/* Since we drew the line *to* it, we don't need the one *from* it */
+.family-tree-container ul .sibling-group > li::after {
+    /* display: none; */ /* Let's see if default works first */
+}
+
+
+/* --- Node Styling --- */
+.family-tree-container .tree-node {
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #666;
+    background-color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem; /* Smaller font */
+    display: inline-block; /* Important for layout and line connection */
+    border-radius: 8px; /* Rounded corners */
+    min-width: 120px; /* Ensure nodes have some width */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    transition: all 0.3s ease; /* Keep transition for smoothness */
+    position: relative; /* Needed for potential absolute positioning inside */
+    z-index: 1; /* Ensure nodes are above lines */
+    cursor: pointer;
+    margin: 0 2px; /* Add slight horizontal margin */
+}
+
+.family-tree-container .tree-node .node-image {
+    display: block;
+    width: 60px; /* Adjust image size */
+    height: 60px;
+    border-radius: 50%; /* Circular images */
+    margin: 0 auto 8px auto; /* Center image and add space below */
+    object-fit: cover;
+    border: 2px solid #eee;
+}
+
+.family-tree-container .tree-node .node-title {
+    display: block;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.2;
+}
+
+/* --- STYLE FOR JS-CONTROLLED HIGHLIGHT --- */
+.family-tree-container .tree-node.highlight-group {
+    background: #eef; /* Or your preferred highlight style */
+    color: #000;
+    border-color: #adadff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+}
+
+/* --- Responsive Adjustments --- */
+@media screen and (max-width: 768px) {
+    .family-tree-container {
+        font-size: 0.9rem;
+    }
+    /* Allow LIs to wrap if needed on smaller screens */
+     .family-tree-container ul {
+         white-space: normal;
+    }
+    .family-tree-container li {
+        padding: 15px 3px 0 3px;
+         /* display: inline-block; */ /* Keep inline-table or switch to block? */
+         /* margin-bottom: 10px; */ /* Add space if they wrap */
+    }
+
+    /* Hide complex connector lines on mobile for simplicity? */
+    .family-tree-container li::before,
+    .family-tree-container li::after,
+    .family-tree-container ul > li > ul::before,
+    .family-tree-container ul > li > ul::after,
+    .family-tree-container ul .sibling-group::before {
+         display: none; /* Simplest solution for mobile */
+    }
+
+     .family-tree-container .tree-node {
+        padding: 8px 10px;
+        min-width: 100px;
+    }
+     .family-tree-container .tree-node .node-image {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* --- END OF FILE family-styles.css --- */

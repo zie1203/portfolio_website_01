@@ -1,0 +1,125 @@
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #87CEEB; /* Sky blue background */
+    margin-top: 20px;
+    user-select: none; /* Prevent text selection during frantic clicking */
+}
+
+h1 {
+    color: #333;
+}
+
+#game-info {
+    margin-bottom: 15px;
+    background-color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    min-width: 200px;
+}
+
+#game-info p {
+    margin: 5px 0;
+    font-size: 1.2em;
+    display: inline-block;
+    margin: 0 15px;
+}
+
+#start-button,
+#play-again-button {
+    padding: 10px 25px;
+    font-size: 1.1em;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    transition: background-color 0.2s ease;
+}
+
+#start-button:hover,
+#play-again-button:hover {
+    background-color: #45a049;
+}
+
+#start-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px); /* 3x3 grid */
+    gap: 15px;
+    background-color: #90EE90; /* Light green grass */
+    padding: 20px;
+    border-radius: 10px;
+    border: 5px solid #8B4513; /* Brown border */
+    position: relative; /* Needed for mole positioning */
+    /* Optional: Add a custom cursor */
+    /* cursor: url('path/to/mallet.png'), auto; */
+}
+
+.hole {
+    width: 100px;
+    height: 100px;
+    background-color: #A0522D; /* Sienna brown for hole */
+    border-radius: 50%; /* Make holes circular */
+    overflow: hidden; /* Hide the mole when it's down */
+    position: relative; /* For absolute positioning of the mole */
+    border: 3px solid #654321; /* Darker border */
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5); /* Inner shadow for depth */
+}
+
+.mole {
+    width: 70%; /* Mole smaller than hole */
+    height: 70%;
+    background-color: #5C4033; /* Mole color */
+    border-radius: 50%;
+    position: absolute;
+    bottom: 5px; /* Start slightly inside the hole */
+    left: 50%;
+    transform: translate(-50%, 100%); /* Start hidden below */
+    transition: transform 0.2s ease-out; /* Smooth pop-up */
+    background-image: radial-gradient(circle, #7a5643 30%, #5C4033 70%); /* Basic mole shading */
+    border: 2px solid #3e2c22;
+    cursor: pointer; /* Show pointer when over mole */
+}
+
+.hole.up .mole {
+    transform: translate(-50%, 10%); /* Mole pops up (adjust Y % as needed) */
+}
+
+/* Game Over Screen */
+#game-over {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    z-index: 100;
+    border: 1px solid #ccc;
+}
+
+#game-over h2 {
+    margin-top: 0;
+    color: #d9534f; /* Reddish color for game over */
+}
+
+#game-over button {
+    margin-top: 15px;
+}
+
+.hidden {
+    display: none;
+}

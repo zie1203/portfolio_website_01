@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Resume | Portfolio</title> <!-- Updated title -->
+    <link rel="stylesheet" href="/style.css" />
+    <!-- <link rel="stylesheet" href="mediaqueries.css" /> --> <!-- Assuming combined -->
+    <link rel="icon" type="image/x-icon" href="/assets/ZILD LOGOs.svg">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+    <!-- NAV (Same as other pages) -->
+    <nav id="desktop-nav">
+        <div class="logo">
+            <a href="landing.html"><img src="/assets/1.svg" alt="Logo" class="logo-img"></a>
+        </div>
+        <div>
+            <ul class="nav-links">
+                <li><a href="landing.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="aboutme.html" class="nav-link-about">About</a>
+                    <ul class="dropdown-content">
+                        <li><a href="aboutme.html">About Me</a></li>
+                        <li><a href="relevantinfo.html">Relevant Information</a></li>
+                        <li><a href="challenges.html">Challenges and Learnings</a></li>
+                        <li><a href="realme.html" class="nav-link-glitch" data-text="The Real Me">The Real Me</a></li>                       
+                        <li><a href="family.html">Family Background</a></li>                    
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="digitalproject.html" class="nav-link-about">Projects</a>
+                    <ul class="dropdown-content">
+                        <li><a href="digitalproject.html">Digital Art</a></li>
+                        <li><a href="programmingproj.html">Programming Projects</a></li>
+                        <li><a href="programmingproj.html">Future Plans</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="contact.html" class="nav-link-about">Contact</a>
+                    <ul class="dropdown-content">
+                        <li><a href="contact.html">Contact Me</a></li>
+                        <!-- Make sure this path is correct! -->
+                        <li><a href="resume.html" target="_blank">Resume</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <nav id="hamburger-nav">
+         <div class="logo">
+            <a href="landing.html"><img src="/assets/1.svg" alt="Logo" class="logo-img"></a>
+        </div>
+        <div class="hamburger-menu">
+            <div class="hamburger-icon" >
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu-links">
+                <li><a href="landing.html" >Home</a></li>
+                <li><a href="aboutme.html" >About</a></li>
+                <li><a href="digitalproject.html" >Projects</a></li>
+                <li><a href="contact.html" >Contact</a></li>
+                 <!-- Make sure this path is correct! -->
+                <li><a href="/assets/Zildjian_Bermas_CV.pdf" target="_blank" >Resume</a></li>
+            </div>
+        </div>
+    </nav>
+    <!-- END Nav -->
+
+    <!-- Resume Section -->
+    <section id="resume-viewer">
+        <div class="section-content-wrapper">
+            <!-- You can optionally add a title here -->
+            <!-- <h1 class="title">My Resume</h1> -->
+
+            <div class="resume-iframe-container">
+                <iframe
+                    src="/assets/resume.pdf"  /* CRITICAL: Verify this path */
+                    width="100%"
+                    height="800px" /* Adjust height as needed */
+                    title="Zildjian Bermas Resume PDF Viewer"
+                    frameborder="0">
+                        <p>Your browser does not support embedded PDFs. You can <a href="/assets/resume.pdf">download the PDF</a> instead.</p>
+                </iframe>
+            </div>
+
+            <div class="resume-download-container">
+                <a
+                    href="/assets/resume.pdf"  /* CRITICAL: Verify this path */
+                    download="Zildjian_Bermas_Resume.pdf" /* Suggested filename for download */
+                    class="btn btn-color-1">
+                    Download Resume (PDF)
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>Copyright © 2024 Z. All Rights Reserved.</p>
+    </footer>
+
+    <script src="/script.js"></script> <!-- Ensure path is correct -->
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Art Projects | Portfolio</title> <!-- More specific title -->
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/gallery.css" /> <!-- Link to new gallery CSS -->
+    <!-- Removed mediaqueries.css link, assuming combined -->
+    <link rel="icon" type="image/x-icon" href="/assets/ZILD LOGOs.svg">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+    <!-- --- Navigation (Keep As Is) --- -->
+    <nav id="desktop-nav">
+        <div class="logo">
+             <!-- Logo now links to the landing page -->
+            <a href="landing.html"><img src="/assets/1.svg" alt="Logo" class="logo-img"></a>
+        </div>
+        <div>
+            <ul class="nav-links">
+                <!-- Link points to landing.html -->
+                <li><a href="landing.html">Home</a></li>
+
+                <!-- START: Updated About Dropdown -->
+                <li class="dropdown">
+                    <!-- Main About link points to aboutme.html -->
+                    <a href="aboutme.html" class="nav-link-about">About</a>
+                    <ul class="dropdown-content">
+                        <li><a href="aboutme.html">About Me</a></li>
+                        <li><a href="relevantinfo.html">Relevant Information</a></li>
+                        <li><a href="challenges.html">Challenges and Learnings</a></li>
+                        <li><a href="realme.html" class="nav-link-glitch" data-text="The Real Me">The Real Me</a></li>                       
+                        <li><a href="family.html">Family Background</a></li>                    </ul>
+                </li>
+                <!-- END: Updated About Dropdown -->
+
+                <!-- START: Updated Projects Dropdown -->
+                <li class="dropdown">
+                    <!-- Main Projects link points to digital projects page -->
+                    <a href="digitalproject.html" class="nav-link-about">Projects</a>
+                    <ul class="dropdown-content">
+                         <!-- Link points to digital projects page -->
+                        <li><a href="digitalproject.html">Digital Art</a></li>
+                         <!-- Link points to programming projects page -->
+                        <li><a href="programmingproj.html">Programming Projects</a></li>
+                        <li><a href="programmingproj.html">Future Plans</a></li>
+                    </ul>
+                </li>
+                <!-- END: Updated Projects Dropdown -->
+
+                 <!-- START: Updated Contact Dropdown -->
+                <li class="dropdown">
+                    <!-- Main Contact link points to contact.html -->
+                    <a href="contact.html" class="nav-link-about">Contact</a>
+                    <ul class="dropdown-content">
+                        <li><a href="contact.html">Contact Me</a></li>
+                        <!-- Link opens the Resume page -->
+                        <li><a href="resume.html">Resume</a></li>
+                    </ul>
+                </li>
+                <!-- END: Updated Contact Dropdown -->
+
+            </ul>
+        </div>
+    </nav>
+    <!-- Hamburger Nav - Updated links -->
+    <nav id="hamburger-nav">
+         <div class="logo">
+             <!-- Logo now links to the landing page -->
+            <a href="landing.html"><img src="/assets/1.svg" alt="Logo" class="logo-img"></a>
+        </div>
+        <div class="hamburger-menu">
+            <div class="hamburger-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu-links">
+                 <!-- Links point to HTML files -->
+                <li><a href="landing.html">Home</a></li>
+                <li><a href="aboutme.html">About</a></li>
+                <li><a href="digitalproject.html">Projects</a></li> <!-- Simple link -->
+                <li><a href="contact.html">Contact</a></li>
+                 <!-- Link to Resume page -->
+                 <li><a href="resume.html">Resume</a></li>
+            </div>
+        </div>
+    </nav>
+    <!-- --- End Navigation --- -->
+
+    <!-- === NEW Draggable Gallery Section Structure === -->
+    <section id="projects" class="digital-art-gallery-page"> <!-- Added specific class -->
+        <!-- Container for the draggable gallery -->
+        <div class="infinite-gallery-container">
+            <!-- Canvas where items are positioned -->
+            <div class="gallery-canvas">
+                <!-- Items will be added here dynamically by gallery.js -->
+            </div>
+        </div>
+        <!-- Overlay for expanded item view -->
+        <div class="gallery-overlay">
+             <!-- Title will be injected here by JS -->
+             <div class="project-title-overlay"></div>
+             <!-- Optional Close button for expanded view -->
+             <!-- <button class="gallery-close-btn">×</button> -->
+        </div>
+    </section>
+    <!-- === END Draggable Gallery Section === -->
+
+    <!-- FOOTER -->
+    <footer>
+      <p>Copyright © 2024 Z. All Rights Reserved.</p>
+    </footer>
+
+    <!-- === Include GSAP Library (Essential for animations) === -->
+    <!-- Get it from CDN or download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <!-- Main script (for nav etc) -->
+    <script src="/script.js"></script>
+    <script type="module" src="/script.js"></script>
+</body>
+</html>

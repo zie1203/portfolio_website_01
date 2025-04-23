@@ -1,0 +1,140 @@
+/* /gallery.css */
+
+/* --- Infinite Draggable Gallery Styles --- */
+
+/* Ensure the section containing the gallery allows full space */
+#projects.digital-art-gallery-page {
+    padding: 0; /* Remove default section padding */
+    min-height: calc(100vh - 11vh - 7vh); /* Adjust if nav/footer height changes */
+    /* background-color: #111; */ /* Optional dark background for contrast */
+}
+
+.infinite-gallery-container {
+    position: absolute; /* Changed from relative */
+    inset: 0; /* Takes full space of parent section */
+    /* position: relative; */
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Crucial: hides items outside */
+    cursor: grab; /* Indicate draggable */
+    background-color: #f0f2f5; /* Light background for the grid area */
+}
+.infinite-gallery-container:active {
+    cursor: grabbing;
+}
+
+.gallery-canvas {
+    position: absolute; /* Items will be positioned relative to this */
+    top: 0;
+    left: 0;
+    width: 100%; /* Start size, JS might adjust */
+    height: 100%;
+    will-change: transform; /* Performance hint */
+    /* background-color: #eee; */ /* Debugging background */
+}
+
+.gallery-item {
+    position: absolute;
+    /* Define item size - JS needs these values too */
+    width: 250px;
+    height: 350px;
+    background-color: #ccc; /* Placeholder background */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+    will-change: transform; /* Performance hint */
+    user-select: none; /* Prevent image selection during drag */
+    /* Base transition for non-GSAP fallback or simple effects */
+    transition: box-shadow 0.3s ease, opacity 0.3s ease;
+    z-index: 1; /* Base stacking */
+}
+.gallery-item:hover {
+     box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+     /* You could add a slight scale here too if desired */
+     /* transform: scale(1.02); */
+}
+
+.gallery-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none; /* Prevent image dragging interfering */
+}
+
+
+/* Overlay for Expanded View */
+.gallery-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* Initially not interactive */
+    transition: opacity 0.4s ease, visibility 0s 0.4s;
+}
+.gallery-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto; /* Allow clicking overlay to close */
+    transition: opacity 0.4s ease, visibility 0s 0s;
+}
+
+/* Expanded Item Placeholder (Styles applied by GSAP) */
+/* We need a temporary element or use the original .gallery-item */
+/* GSAP will directly style the element being expanded */
+
+/* Style for the Title Overlay */
+.project-title-overlay {
+    position: absolute;
+    bottom: 5vh; /* Position from bottom */
+    left: 50%;
+    transform: translateX(-50%) translateY(20px); /* Start below, centered */
+    background-color: rgba(18, 18, 18, 0.8); /* Dark background */
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    font-family: "Outfit", sans-serif;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease 0.3s, transform 0.4s ease 0.3s, visibility 0s 0.7s; /* Delayed fade/slide in */
+    z-index: 2001; /* Above overlay, below close button */
+}
+.gallery-overlay.visible .project-title-overlay {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    transition: opacity 0.4s ease 0.3s, transform 0.4s ease 0.3s, visibility 0s 0.3s;
+}
+
+/* Optional Close Button for Expanded View */
+/*
+.gallery-close-btn {
+    position: fixed; // Use fixed so it stays put
+    top: 20px;
+    right: 20px;
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 2002; // Above title overlay
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease 0.5s, color 0.2s ease; // Delayed fade-in
+}
+.gallery-overlay.visible .gallery-close-btn {
+    opacity: 1;
+    visibility: visible;
+}
+.gallery-close-btn:hover {
+    color: #fff;
+}
+*/

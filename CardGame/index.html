@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Card Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>Matching Card Game</h1>
+
+    <div id="controls">
+        <label for="difficulty">Difficulty:</label>
+        <select id="difficulty">
+            <option value="easy">Easy (4 pairs)</option>
+            <option value="medium" selected>Medium (8 pairs)</option>
+            <option value="hard">Hard (12 pairs)</option>
+        </select>
+        <button id="start-button">Start Game</button>
+    </div>
+
+    <div id="game-info">
+        <p>Time: <span id="timer">0</span>s</p>
+        <p>Moves: <span id="moves">0</span></p>
+    </div>
+
+    <div id="game-board" class="game-board">
+        <!-- Cards will be generated here by JavaScript -->
+    </div>
+
+    <div id="results" class="hidden">
+        <h2>Game Over!</h2>
+        <p>Difficulty: <span id="result-difficulty"></span></p>
+        <p>Time Taken: <span id="result-time"></span> seconds</p>
+        <p>Moves Made: <span id="result-moves"></span></p>
+        <p>Final Score: <span id="result-score"></span> points</p>
+        <button id="play-again-button">Play Again</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

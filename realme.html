@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Real Me | Portfolio</title> <!-- Specific title -->
+    <link rel="stylesheet" href="/style.css" /> <!-- Links to main CSS -->
+    <link rel="icon" type="image/x-icon" href="/assets/ZILD LOGOs.svg">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<!-- Added class to body for page-specific styles -->
+<body class="realme-page-body">
+    <!-- START: Full Navigation Block -->
+    <nav id="desktop-nav">
+        <div class="logo">
+            <a href="landing.html"><img src="/assets/1.svg" alt="Logo" class="logo-img"></a>
+        </div>
+        <div>
+            <ul class="nav-links">
+                <li><a href="landing.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="aboutme.html" class="nav-link-about">About</a>
+                    <ul class="dropdown-content">
+                        <li><a href="aboutme.html">About Me</a></li>
+                        <li><a href="relevantinfo.html">Relevant Information</a></li>
+                        <li><a href="challenges.html">Challenges and Learnings</a></li>
+                        <li><a href="realme.html" class="nav-link-glitch" data-text="The Real Me">The Real Me</a></li>                       
+                        <li><a href="family.html">Family Background</a></li>                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="digitalproject.html" class="nav-link-about">Projects</a>
+                    <ul class="dropdown-content">
+                        <li><a href="digitalproject.html">Digital Art</a></li>
+                        <li><a href="programmingproj.html">Programming Projects</a></li>
+                        <li><a href="programmingproj.html">Future Plans</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="contact.html" class="nav-link-about">Contact</a>
+                    <ul class="dropdown-content">
+                        <li><a href="contact.html">Contact Me</a></li>
+                        <li><a href="resume.html">Resume</a></li> <!-- Link to resume page -->
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <nav id="hamburger-nav">
+         <div class="logo">
+            <a href="landing.html"><img src="/assets/1.svg" alt="Logo" class="logo-img"></a>
+        </div>
+        <div class="hamburger-menu">
+            <div class="hamburger-icon" >
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu-links">
+                <li><a href="landing.html" >Home</a></li>
+                <li><a href="aboutme.html" >About</a></li>
+                <li><a href="digitalproject.html" >Projects</a></li>
+                <li><a href="contact.html" >Contact</a></li>
+                <li><a href="resume.html" >Resume</a></li> <!-- Link to resume page -->
+            </div>
+        </div>
+    </nav>
+    <!-- END: Full Navigation Block -->
+
+    <!-- Screen Off Transition Section -->
+    <section id="real-me-peel">
+
+        <!-- Layer below (Content for Night Mode) -->
+        <div class="revealed-content">
+
+            <h2>Information Packets</h2>
+
+            <!-- Carousel Wrapper (Viewport and Controls) -->
+            <div class="carousel-container">
+                <!-- Previous Arrow -->
+                <button class="carousel-arrow carousel-prev" aria-label="Previous slide"><</button>
+
+                <!-- Viewport for Cards -->
+                <div class="card-carousel-viewport">
+                    <!-- Inner Track (Moves Horizontally) -->
+                    <div class="carousel-track">
+
+                        <!-- Card 1 -->
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <!-- Replace with actual image -->
+                                    <img src="/assets/arnis3.jpg" alt="Topic 1 Image">
+                                </div>
+                                <div class="flip-card-back">
+                                    <h3>My Passion for Filipino Martial Arts</h3>
+                                    <p>Since discovering Arnis in highschool, I've been fascinated by the art of our own martial art. It feels as if weaving and slicing things at the same time. A deadly beat and dance, known only by those who dance it.  </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="flip-card">
+                           <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                     <!-- Replace with actual image -->
+                                    <img src="/assets/gunn.jpg" alt="Topic 2 Image">
+                                </div>
+                                <div class="flip-card-back">
+                                    <h3>Proficient Gunman</h3>
+                                    <p>Over the years, I've fired guns for leisure and for sport. My first encounter with a handgun was when I was fourteen. From then on, I've become enamored with the art of shooting</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="flip-card">
+                           <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                     <!-- Replace with actual image -->
+                                    <img src="/assets/friends.jpg" alt="Topic 3 Image">
+                                </div>
+                                <div class="flip-card-back">
+                                    <h3>Friends. Allies. Comrades</h3>
+                                    <p>Through trials of being a student, these people have been my steadfast companions, offering solace and support. <p> <!-- Example -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <img src="/assets/blueprint.jpg" alt="Topic 5 Image">
+                                </div>
+                                <div class="flip-card-back">
+                                    <h3>Visualization. Precision. Execution</h3>
+                                    <p>As an individual, the way I work tends to circulate around the process of properly visualizing what I have to do, ensure how I will achieve the outcome, then execute. </p> <!-- Example -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <img src="/assets/sea.jpg" alt="Topic 5 Image">
+                                </div>
+                                <div class="flip-card-back">
+                                    <h3>Littoral Intermission</h3>
+                                    <p>When all gets heavy, I frequently find myself longing for the sea. The cleansing and calm it provides when one is near beside it is an experience I could never get used to.</p> <!-- Example -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 4 (Example) -->
+                        <div class="flip-card">
+                             <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <img src="/assets/rankk.jpg" alt="Topic 4 Image">
+                                </div>
+                                <div class="flip-card-back">
+                                    <h3>Digital Rage Sponge</h3>
+                                    <p>Beyond schoolworks and tiring stresses of daily life, I play mobile games such as MLBB to pass the time, and pent-up stress</p> <!-- Example -->
+                                </div>
+                            </div>
+                        </div>
+
+                         <!-- Card 5 (Example) -->
+                        
+
+                        
+
+                        <!-- Add more cards if needed -->
+
+                    </div> <!-- End Carousel Track -->
+                </div> <!-- End Viewport -->
+
+                <!-- Next Arrow -->
+                <button class="carousel-arrow carousel-next" aria-label="Next slide">></button>
+            </div> <!-- End Carousel Container -->
+
+        </div> <!-- End Revealed Content -->
+
+        <!-- Top Layer (Turns "off") -->
+        <div class="peeling-page" id="initial-layer">
+            <div class="typing-container">
+                <h1 class="title typing-text">You... want to know the real me?</h1>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- FOOTER IS REMOVED -->
+
+    <script src="/script.js"></script> <!-- Ensure path is correct -->
+</body>
+</html>

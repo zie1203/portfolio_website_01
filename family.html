@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Family Background | Portfolio</title> <!-- Specific title -->
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/family-styles.css" /> <!-- NEW CSS File -->
+    <link rel="icon" type="image/x-icon" href="/assets/ZILD LOGOs.svg">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body> <!-- Removed realme-page-body class -->
+    <!-- NAV (Keep your existing nav structure here) -->
+    <nav id="desktop-nav">
+        <div class="logo"> <a href="landing.html"><img src="/assets/1.svg" alt="Logo" class="logo-img"></a> </div>
+        <div>
+            <ul class="nav-links">
+                <li><a href="landing.html">Home</a></li>
+                <li class="dropdown"> <a href="aboutme.html" class="nav-link-about">About</a>
+                    <ul class="dropdown-content">
+                        <li><a href="aboutme.html">About Me</a></li>
+                        <li><a href="relevantinfo.html">Relevant Information</a></li>
+                        <li><a href="challenges.html">Challenges and Learnings</a></li>
+                        <li><a href="realme.html" class="nav-link-glitch" data-text="The Real Me">The Real Me</a></li>
+                        <li><a href="family.html">Family Background</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"> <a href="digitalproject.html" class="nav-link-about">Projects</a>
+                    <ul class="dropdown-content">
+                        <li><a href="digitalproject.html">Digital Art</a></li>
+                        <li><a href="programmingproj.html">Programming Projects</a></li>
+                         <li><a href="futureplans.html">Future Plans</a></li> <!-- Link to future plans -->
+                    </ul>
+                </li>
+                <li class="dropdown"> <a href="contact.html" class="nav-link-about">Contact</a>
+                    <ul class="dropdown-content">
+                        <li><a href="contact.html">Contact Me</a></li>
+                        <li><a href="resume.html">Resume</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <nav id="hamburger-nav">
+         <div class="logo"> <a href="landing.html"><img src="/assets/1.svg" alt="Logo" class="logo-img"></a> </div>
+        <div class="hamburger-menu"> <div class="hamburger-icon" > <span></span><span></span><span></span> </div> <!-- Removed onclick -->
+            <div class="menu-links"> <!-- JS will handle toggling -->
+                 <li><a href="landing.html" >Home</a></li>
+                 <li><a href="aboutme.html" >About</a></li>
+                 <li><a href="digitalproject.html" >Projects</a></li>
+                 <li><a href="contact.html" >Contact</a></li>
+                 <li><a href="./assets/Zildjian_Bermas_CV.pdf" target="_blank" >Resume</a></li>
+            </div>
+        </div>
+    </nav>
+    <!-- END Nav -->
+
+  <!-- Family Background Section -->
+  <section id="family-background">
+    <div class="section-content-wrapper">
+        <h1 class="title">My Family Background</h1>
+
+        <div class="family-tree-container">
+
+            <!-- Level 1: Grandparents -->
+            <ul class="tree-level level-grandparents">
+                 <li> <!-- Paternal GP -->
+                     <a href="#" class="tree-node" data-modal-target="grandpa-p" data-group="gp-paternal">
+                        <img src="/assets/tata.png" alt="Paternal Grandfather" class="node-image">
+                        <span class="node-title">Grandfather (Dad's Side)</span>
+                    </a>
+                     <a href="#" class="tree-node" data-modal-target="grandma-p" data-group="gp-paternal">
+                        <img src="/assets/ellen.jpg" alt="Paternal Grandmother" class="node-image">
+                        <span class="node-title">Grandmother (Dad's Side)</span>
+                    </a>
+                </li>
+                 <li> <!-- Spacer LI to create visual gap -->
+                    <div class="node-spacer"></div>
+                </li>
+                 <li> <!-- Maternal GP -->
+                     <a href="#" class="tree-node" data-modal-target="grandpa-m" data-group="gp-maternal">
+                        <img src="/assets/tatay.png" alt="Maternal Grandfather" class="node-image">
+                        <span class="node-title">Grandfather (Mom's Side)</span>
+                    </a>
+                     <a href="#" class="tree-node" data-modal-target="grandma-m" data-group="gp-maternal">
+                        <img src="/assets/rachel.jpg" alt="Maternal Grandmother" class="node-image">
+                        <span class="node-title">Grandmother (Mom's Side)</span>
+                    </a>
+                 </li>
+            </ul>
+
+            <!-- Level 2: Parents -->
+            <ul class="tree-level level-parents">
+                <li class="parent-node parent-dad"> <!-- Parent Dad Branch -->
+                    <a href="#" class="tree-node" data-modal-target="dad" data-group="parents" data-child-of="gp-paternal">
+                        <img src="/assets/ramon.png" alt="Dad" class="node-image">
+                        <span class="node-title">Dad</span>
+                    </a>
+                </li>
+                 <li class="parent-node parent-mom"> <!-- Parent Mom Branch -->
+                    <a href="#" class="tree-node" data-modal-target="mom" data-group="parents" data-child-of="gp-maternal">
+                        <img src="/assets/mary.jpg" alt="Mom" class="node-image">
+                        <span class="node-title">Mom</span>
+                    </a>
+                </li>
+            </ul>
+
+             <!-- Level 3: Siblings -->
+            <ul class="tree-level level-siblings sibling-group"> <!-- Added sibling-group class -->
+                 <li>
+                    <a href="#" class="tree-node" data-modal-target="brother" data-group="siblings" data-child-of="parents">
+                        <img src="/assets/marc.jpg" alt="Older Brother" class="node-image">
+                        <span class="node-title">Older Brother</span>
+                    </a>
+                </li>
+                <li>
+                     <a href="#" class="tree-node" data-modal-target="me" data-group="siblings" data-child-of="parents">
+                        <img src="/assets/zild.jpg" alt="Me" class="node-image"> <!-- Your image -->
+                        <span class="node-title">Me (Zildjian)</span>
+                    </a>
+                </li>
+                 <li>
+                     <a href="#" class="tree-node" data-modal-target="sister" data-group="siblings" data-child-of="parents">
+                        <img src="/assets/zian.jpg" alt="Younger Sister" class="node-image">
+                        <span class="node-title">Younger Sister</span>
+                    </a>
+                </li>
+            </ul>
+
+        </div> <!-- End family-tree-container -->
+
+    </div> <!-- End section-content-wrapper -->
+</section>
+<!-- END Family Background Section -->
+
+<!-- Family Member Modal (Keep as is) -->
+<div id="family-member-modal" class="modal-overlay">
+     <div class="modal-content family-modal-content">
+         <span class="modal-close-btn">×</span>
+         <div class="modal-image-container" id="family-modal-image-container">
+             <img src="" alt="Family Member Image" id="family-modal-image">
+         </div>
+         <div class="modal-text-container" id="family-modal-text-container">
+             <h2 id="family-modal-title"></h2>
+             <div id="family-modal-body"></div>
+         </div>
+     </div>
+ </div>
+<!-- END Modal -->
+
+<!-- FOOTER (Keep as is) -->
+<footer>
+    <p>Copyright © 2024 Z. All Rights Reserved.</p>
+</footer>
+    <script type="module" src="/script.js"></script>
+</body>
+</html>
