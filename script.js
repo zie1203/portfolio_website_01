@@ -274,27 +274,27 @@ const familyMemberData = {
     },
     "dad": {
         image: "assets/ramon.png",
-        title: "Ramon Bermas (Dad)",
+        title: "Daddy",
         description: "My father, sometimes I call abeoji, is a hardworking father. He is the one who keeps our family afloat. Though he works overseas, we make up for lost time by spending time together whenever he comes home. We spend the night having midnight snacks and watching movies. I remember one time when he came home, we spent the whole night playing games and eating snacks. It was a great bonding moment for us."
     },
     "mom": {
         image: "assets/mary.jpg",
-        title: "Mary Chris Manzano (Mom)",
+        title: "Mommy ",
         description: "My mother, my bestie. We often share a lot of stuff when it comes to our K-Pop Idols and K-Dramas. Whenever I have a problem, I always go to her for advice. It was a great way to bond and I felt so much better afterwards."
     },
     "brother": {
         image: "assets/marc.jpg",
-        title: "Marc Louise Bermas (Older Brother)",
+        title: "Kuya Marc",
         description: "My older brother, always the onlooker for us younger siblings, whenever there is a problem in the house, he's sure to fix it because of how handy he is."
     },
     "me": {
         image: "assets/zild.jpg",
-        title: "Zildjian Bermas (Me)",
+        title: "Me",
         description: "That's me! Trying to navigate life, studies, and creativity. I used to live in the side of my grandparents, and I have a lot of fond memories with them. But, I now live with my parents here in Cavite. I am a student, and I am currently studying at CVSU-B. I am a web developer and a graphic designer. I love to create things, and I love to learn new things."
     },
     "sister": {
         image: "assets/zian.jpg",
-        title: "Zian Chris Bermas (Younger Sister)",
+        title: "Zian Mace (Younger Sister)",
         description: "My younger sister, Zian. Bright, bubbly, and keeps the family lively. She loves to draw anything about fashion. From kimonos to gothic dresses, she loves to draw them all. She is also a student."
     }
     // Add more entries if you expand the tree
