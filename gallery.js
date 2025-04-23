@@ -6,7 +6,7 @@ const ITEM_WIDTH = 250; // px - Must match CSS
 const ITEM_HEIGHT = 350; // px - Must match CSS
 const GAP = 24; // px - Approx gap (adjust based on CSS rem value or measure)
 const SCROLL_MULTIPLIER = 1.5; // How much dragging moves the canvas
-const IMAGE_FOLDER = "/assets"; // Path to your gallery images folder
+const IMAGE_FOLDER = "assets"; // Path to your gallery images folder
 const ITEMS = [ // Array of image filenames and titles
     { file: "dont troll.svg", title: "Don't Troll Poster" },
     { file: "kabsu.png", title: "Kabsuhenyo Poster" }, // Ensure filename is correct
