@@ -254,48 +254,48 @@ function initializeChallengeModals() {
 const familyMemberData = {
     "grandpa-p": {
         image: "assets/tata.png",
-        title: "Paternal Grandfather",
-        description: "My dad's father. A hardworking provider and the patriarch of the Bermas side."
+        title: "Tata",
+        description: "This is Tata, he and Mamalab took care of me in my younger years. He has cared for me and gave me many unforgettable memories. One fond memory I have of him is when he takes me to our small lot and let me loiter around while he harvests our guava and banana trees."
     },
     "grandma-p": {
         image: "assets/ellen.jpg",
-        title: "Paternal Grandmother",
-        description: "My dad's mother. Known for her kindness and delicious cooking."
+        title: "Mamalab",
+        description: "Mamalab is the reason for who and what I am today. She is the one who took care of me when I was a child, and she is the one who taught me how to read and write. Every moment with her is a memory I will cherish forever."
     },
     "grandpa-m": {
         image: "assets/tatay.png",
-        title: "Maternal Grandfather",
-        description: "My mom's father. A source of wisdom and quiet strength."
+        title: "Tatay Pedro",
+        description: "Tatay Pedro lives with Nanay in the province. I've known him as a rigid, yet caring person in our family. A fond memory I have with him is when he took me around the city in our province riding a motorcycle. It's probably the reason why I'm fond of motorcycles."
     },
     "grandma-m": {
         image: "assets/rachel.jpg",
         title: "Maternal Grandmother",
-        description: "My mom's mother. The loving matriarch of the Manzano side, always full of stories."
+        description: "Nanay is my grandmother in our province, Ilo Ilo. We used to visit every summer and I remember her as a kind and nurturing person. She always made sure I was well-fed and cared for. I remember her cooking my favorite dishes and telling me stories about our family history."
     },
     "dad": {
         image: "assets/ramon.png",
         title: "Ramon Bermas (Dad)",
-        description: "My father, an inspiration and my biggest supporter in pursuing my passions."
+        description: "My father, sometimes I call abeoji, is a hardworking father. He is the one who keeps our family afloat. Though he works overseas, we make up for lost time by spending time together whenever he comes home. We spend the night having midnight snacks and watching movies. I remember one time when he came home, we spent the whole night playing games and eating snacks. It was a great bonding moment for us."
     },
     "mom": {
         image: "assets/mary.jpg",
         title: "Mary Chris Manzano (Mom)",
-        description: "My mother, the heart of our family, always encouraging and caring."
+        description: "My mother, my bestie. We often share a lot of stuff when it comes to our K-Pop Idols and K-Dramas. Whenever I have a problem, I always go to her for advice. It was a great way to bond and I felt so much better afterwards."
     },
     "brother": {
         image: "assets/marc.jpg",
         title: "Marc Louise Bermas (Older Brother)",
-        description: "My older brother. Paved the way and always looks out for us."
+        description: "My older brother, always the onlooker for us younger siblings, whenever there is a problem in the house, he's sure to fix it because of how handy he is."
     },
     "me": {
         image: "assets/zild.jpg",
         title: "Zildjian Bermas (Me)",
-        description: "That's me! Trying to navigate life, studies, and creativity."
+        description: "That's me! Trying to navigate life, studies, and creativity. I used to live in the side of my grandparents, and I have a lot of fond memories with them. But, I now live with my parents here in Cavite. I am a student, and I am currently studying at CVSU-B. I am a web developer and a graphic designer. I love to create things, and I love to learn new things."
     },
     "sister": {
         image: "assets/zian.jpg",
         title: "Zian Chris Bermas (Younger Sister)",
-        description: "My younger sister. Bright, bubbly, and keeps the family lively."
+        description: "My younger sister, Zian. Bright, bubbly, and keeps the family lively. She loves to draw anything about fashion. From kimonos to gothic dresses, she loves to draw them all. She is also a student."
     }
     // Add more entries if you expand the tree
 };
