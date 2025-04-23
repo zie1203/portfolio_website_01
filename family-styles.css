@@ -56,7 +56,7 @@
     border-top: 1.5px solid #ccc;
     width: 50%;
     height: 20px; /* Should match ul padding-top */
-    z-index: 0;
+    z-index: 0; /* Ensure lines are behind nodes */
 }
 .family-tree-container li::after {
     right: auto;
@@ -89,73 +89,68 @@
 }
 
 /* --- Specific Connectors for Parents/Siblings --- */
+/* These rules create the specific lines connecting parent levels to child levels */
 
-/* Horizontal line connector between parents */
-/* Targets the UL containing the parent LIs */
-.family-tree-container ul > li > ul::before { /* Draws the line between Dad & Mom */
+/* Targets the UL *directly under* the LI containing the grandparents
+   (i.e., the UL holding the 'Dad' and 'Mom' LIs) */
+.family-tree-container ul > li > ul::before { /* Draws the horizontal line between Dad & Mom nodes */
     content: '';
     position: absolute;
-    top: 20px; /* Aligns with li padding-top */
-    left: 25%; /* Starts at center of first parent LI */
-    width: 50%; /* Spans between centers of two parent LIs */
-    height: 0;
-    border-top: 1.5px solid #ccc;
-    z-index: 0;
-    /* !! Fine-tune left/width percentages with dev tools if needed !! */
+    top: 0; /* Adjusted: Should align with the *top* of the parent nodes' connection point */
+    left: 50%; /* Starts at the center of the first parent LI */
+    width: 0%; /* Adjust width dynamically if needed, or use JS, but 0 might be okay if centered parent nodes */
+    /* This horizontal connector seems problematic with inline-table parents, may need rethink or JS lines */
+    /* Let's try connecting the parent nodes directly if they are siblings */
+    /* If Dad and Mom LIs are siblings, the ::before/::after on the LIs themselves handle part of the connection */
+    /* A line between the parents might be better drawn specifically if needed */
+    /* display: none; */ /* Hide this for now, rely on LI connectors */
 }
 
-/* Vertical connector FROM the horizontal parent line DOWN towards siblings */
-/* Targets the UL containing the parent LIs */
-.family-tree-container ul > li > ul::after { /* Draws the drop-down from the parent connector line */
+/* This rule connects the parent node (e.g., Mom) vertically down to the Sibling UL */
+/* Targets the UL containing the parent LIs (e.g., Dad/Mom) */
+.family-tree-container ul > li > ul::after { /* Draws the drop-down from the parent level towards siblings */
     content: '';
     position: absolute;
-    top: 20px; /* Starts where the horizontal line is */
-    left: 50%; /* Center of the parent UL */
+    top: 20px; /* Starts from the padding area below the parent node */
+    left: 50%; /* Center relative to the parent UL (which might span both Dad/Mom) */
     width: 0;
     height: 20px; /* Matches the sibling group's padding-top */
     border-left: 1.5px solid #ccc;
     z-index: 0;
 }
 
-
-/* Vertical connector for the SIBLING group */
+/* Vertical connector for the SIBLING group UL */
 /* This connects the siblings UL to the vertical line dropping from the parents */
 .family-tree-container ul .sibling-group::before {
     content: '';
     position: absolute;
-    top: 0; /* Start from the top padding area */
-    left: 50%; /* Center relative to the sibling group UL's parent LI (Mom) */
-    /* No horizontal transform needed now - connects directly to parent drop-down line */
-    /* transform: translateX(-50%); */ /* REMOVED */
+    top: 0; /* Start from the top padding area of the sibling UL */
+    left: 50%; /* Center relative to the sibling group UL */
+    /* Connects directly to parent drop-down line */
     border-left: 1.5px solid #ccc;
     width: 0;
     height: 20px; /* Match sibling UL padding-top */
     z-index: 0;
 }
 
+
 /* --- Hide Conflicting/Unnecessary Default Lines --- */
+/* (Review these carefully, might need adjustments based on exact structure) */
 
-/* Hide the default vertical connector for any UL directly under a parent LI */
-/* (We replaced this with the specific parent connector above) */
-.family-tree-container ul > li > ul > li::after {
-     /* This refers to the vertical stem of Dad/Mom nodes - hide it */
-     /* border-left: none; */ /* Let's keep this for now */
-}
-/* Hide the default connector for the UL containing the PARENTS */
-.family-tree-container ul > li > ul:first-child::before {
-     /* Prevent the standard UL>LI connector rule applying here */
-     /* border-top: none; */ /* Might need this, test first */
-}
+/* Hide default vertical line from parent node if specific connector exists */
+/* This might hide the line coming down *from* Dad/Mom node - potentially needed */
+/* .family-tree-container ul > li > ul > li::after { */
+    /* border-left: none; */
+/* } */
 
-/* Hide the default vertical connector stem for the SIBLING GROUP UL itself */
-/* Since we drew the line *to* it, we don't need the one *from* it */
-.family-tree-container ul .sibling-group > li::after {
-    /* display: none; */ /* Let's see if default works first */
-}
+/* Hide default horizontal line part for the UL containing parents if needed */
+/* .family-tree-container ul > li > ul:first-child::before { */
+    /* border-top: none; */
+/* } */
 
 
 /* --- Node Styling --- */
-.family-tree-container .tree-node {
+.family-tree-container .tree-node { /* This class is crucial */
     border: 1px solid #ccc;
     padding: 10px 15px;
     text-decoration: none;
@@ -168,7 +163,7 @@
     min-width: 120px; /* Ensure nodes have some width */
     box-shadow: 0 2px 4px rgba(0,0,0,0.08);
     transition: all 0.3s ease; /* Keep transition for smoothness */
-    position: relative; /* Needed for potential absolute positioning inside */
+    position: relative; /* Needed for absolute positioning inside */
     z-index: 1; /* Ensure nodes are above lines */
     cursor: pointer;
     margin: 0 2px; /* Add slight horizontal margin */
@@ -192,30 +187,43 @@
 }
 
 /* --- STYLE FOR JS-CONTROLLED HIGHLIGHT --- */
-.family-tree-container .tree-node.highlight-group {
-    background: #eef; /* Or your preferred highlight style */
-    color: #000;
-    border-color: #adadff;
+.family-tree-container .tree-node.highlight-group { /* This class is added/removed by JS */
+    background: #eef; /* Light blue background */
+    color: #000;      /* Darker text */
+    border-color: #adadff; /* Blue border */
     box-shadow: 0 4px 8px rgba(0,0,0,0.12);
-    transform: translateY(-2px);
+    transform: translateY(-2px); /* Optional: slight lift effect */
+    /* Ensure transition applies */
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+/* --- MODAL CONTENT STYLING (Placeholders/Suggestions) --- */
+/* Style the modal content if needed */
+
+.modal-content.family-modal-content {
+     /* Add specific styles here if the default modal look isn't right */
+     /* For example: */
+     /* max-width: 550px; */
 }
 
 /* --- Responsive Adjustments --- */
 @media screen and (max-width: 768px) {
     .family-tree-container {
         font-size: 0.9rem;
+        /* Consider if horizontal scroll is acceptable or if layout should break */
     }
     /* Allow LIs to wrap if needed on smaller screens */
      .family-tree-container ul {
-         white-space: normal;
+         /* white-space: normal; */ /* Uncomment if wrapping is desired over scrolling */
     }
     .family-tree-container li {
         padding: 15px 3px 0 3px;
-         /* display: inline-block; */ /* Keep inline-table or switch to block? */
-         /* margin-bottom: 10px; */ /* Add space if they wrap */
+         /* display: block; */ /* Change display if you want vertical stack */
+         /* margin-bottom: 10px; */ /* Add space if they stack/wrap */
     }
 
-    /* Hide complex connector lines on mobile for simplicity? */
+    /* Hide complex connector lines on mobile for simplicity */
     .family-tree-container li::before,
     .family-tree-container li::after,
     .family-tree-container ul > li > ul::before,

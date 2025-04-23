@@ -50,7 +50,7 @@
                  <li><a href="aboutme.html" >About</a></li>
                  <li><a href="digitalproject.html" >Projects</a></li>
                  <li><a href="contact.html" >Contact</a></li>
-                 <li><a href=".assets/Zildjian_Bermas_CV.pdf" target="_blank" >Resume</a></li>
+                 <li><a href="./assets/Zildjian_Bermas_CV.pdf" target="_blank" >Resume</a></li> <!-- Corrected path with ./ -->
             </div>
         </div>
     </nav>
@@ -61,15 +61,17 @@
     <div class="section-content-wrapper">
         <h1 class="title">My Family Background</h1>
 
-        <div class="family-tree-container">
+        <div class="family-tree-container"> <!-- Make sure this class exists -->
 
             <!-- Level 1: Grandparents -->
             <ul class="tree-level level-grandparents">
                  <li> <!-- Paternal GP -->
+                     <!-- Node with data attributes -->
                      <a href="#" class="tree-node" data-modal-target="grandpa-p" data-group="gp-paternal">
                         <img src="assets/tata.png" alt="Paternal Grandfather" class="node-image">
                         <span class="node-title">Grandfather (Dad's Side)</span>
                     </a>
+                     <!-- Node with data attributes -->
                      <a href="#" class="tree-node" data-modal-target="grandma-p" data-group="gp-paternal">
                         <img src="assets/ellen.jpg" alt="Paternal Grandmother" class="node-image">
                         <span class="node-title">Grandmother (Dad's Side)</span>
@@ -79,10 +81,12 @@
                     <div class="node-spacer"></div>
                 </li>
                  <li> <!-- Maternal GP -->
+                     <!-- Node with data attributes -->
                      <a href="#" class="tree-node" data-modal-target="grandpa-m" data-group="gp-maternal">
                         <img src="assets/tatay.png" alt="Maternal Grandfather" class="node-image">
                         <span class="node-title">Grandfather (Mom's Side)</span>
                     </a>
+                     <!-- Node with data attributes -->
                      <a href="#" class="tree-node" data-modal-target="grandma-m" data-group="gp-maternal">
                         <img src="assets/rachel.jpg" alt="Maternal Grandmother" class="node-image">
                         <span class="node-title">Grandmother (Mom's Side)</span>
@@ -93,12 +97,14 @@
             <!-- Level 2: Parents -->
             <ul class="tree-level level-parents">
                 <li class="parent-node parent-dad"> <!-- Parent Dad Branch -->
+                     <!-- Node with data attributes -->
                     <a href="#" class="tree-node" data-modal-target="dad" data-group="parents" data-child-of="gp-paternal">
                         <img src="assets/ramon.png" alt="Dad" class="node-image">
                         <span class="node-title">Dad</span>
                     </a>
                 </li>
                  <li class="parent-node parent-mom"> <!-- Parent Mom Branch -->
+                     <!-- Node with data attributes -->
                     <a href="#" class="tree-node" data-modal-target="mom" data-group="parents" data-child-of="gp-maternal">
                         <img src="assets/mary.jpg" alt="Mom" class="node-image">
                         <span class="node-title">Mom</span>
@@ -109,18 +115,21 @@
              <!-- Level 3: Siblings -->
             <ul class="tree-level level-siblings sibling-group"> <!-- Added sibling-group class -->
                  <li>
+                     <!-- Node with data attributes -->
                     <a href="#" class="tree-node" data-modal-target="brother" data-group="siblings" data-child-of="parents">
                         <img src="assets/marc.jpg" alt="Older Brother" class="node-image">
                         <span class="node-title">Older Brother</span>
                     </a>
                 </li>
                 <li>
+                     <!-- Node with data attributes -->
                      <a href="#" class="tree-node" data-modal-target="me" data-group="siblings" data-child-of="parents">
                         <img src="assets/zild.jpg" alt="Me" class="node-image"> <!-- Your image -->
                         <span class="node-title">Me (Zildjian)</span>
                     </a>
                 </li>
                  <li>
+                     <!-- Node with data attributes -->
                      <a href="#" class="tree-node" data-modal-target="sister" data-group="siblings" data-child-of="parents">
                         <img src="assets/zian.jpg" alt="Younger Sister" class="node-image">
                         <span class="node-title">Younger Sister</span>
@@ -134,16 +143,16 @@
 </section>
 <!-- END Family Background Section -->
 
-<!-- Family Member Modal (Keep as is) -->
-<div id="family-member-modal" class="modal-overlay">
+<!-- Family Member Modal -->
+<div id="family-member-modal" class="modal-overlay"> <!-- Ensure this ID is correct -->
      <div class="modal-content family-modal-content">
-         <span class="modal-close-btn">×</span>
+         <span class="modal-close-btn">×</span> <!-- Ensure this class exists -->
          <div class="modal-image-container" id="family-modal-image-container">
-             <img src="" alt="Family Member Image" id="family-modal-image">
+             <img src="" alt="Family Member Image" id="family-modal-image"> <!-- Ensure this ID exists -->
          </div>
          <div class="modal-text-container" id="family-modal-text-container">
-             <h2 id="family-modal-title"></h2>
-             <div id="family-modal-body"></div>
+             <h2 id="family-modal-title"></h2> <!-- Ensure this ID exists -->
+             <div id="family-modal-body"></div> <!-- Ensure this ID exists -->
          </div>
      </div>
  </div>
@@ -153,6 +162,9 @@
 <footer>
     <p>Copyright © 2024 Z. All Rights Reserved.</p>
 </footer>
+    <!-- Try relative path first, assuming script.js is in the same folder -->
     <script type="module" src="script.js"></script>
+    <!-- If that doesn't work, try without module as a test -->
+    <!-- <script src="script.js"></script> -->
 </body>
 </html>

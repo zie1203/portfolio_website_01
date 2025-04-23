@@ -124,13 +124,14 @@ function initializeMultiSlideModal(triggerId, modalId) {
 function initializeScreenOffTransition() {
     const initialLayer = document.getElementById('initial-layer');
     const revealedContent = document.querySelector('#real-me-peel .revealed-content');
-    const bodyElement = document.querySelector('body.realme-page-body');
+    const bodyElement = document.querySelector('body.realme-page-body'); // Keep targetting specific body class
     if (initialLayer && revealedContent && bodyElement) {
         const handleScreenOffClick = () => {
             if (initialLayer.classList.contains('turning-off')) return;
             initialLayer.classList.add('turning-off');
             bodyElement.classList.add('night-mode');
-            document.body.classList.add('night-mode'); // Add global night mode too
+            // Optionally add to document.body as well IF styles depend on it globally
+            // document.body.classList.add('night-mode');
             revealedContent.classList.add('visible');
         };
         initialLayer.addEventListener('click', handleScreenOffClick);
@@ -138,9 +139,14 @@ function initializeScreenOffTransition() {
         if (typingText) {
             typingText.addEventListener('animationend', (event) => {
                 if (event.animationName === 'typing') {
-                    typingText.style.borderRightColor = 'transparent';
+                    // Stop the caret blinking after typing finishes
+                    typingText.style.borderRightColor = 'transparent'; // Make border transparent
+                    // Remove the blink-caret animation specifically
                     let currentAnimation = window.getComputedStyle(typingText).animation;
-                    let newAnimation = currentAnimation.split(',').filter(anim => !anim.trim().startsWith('blink-caret')).join(',');
+                    // Filter out the blink-caret animation part
+                    let newAnimation = currentAnimation.split(',')
+                                             .filter(anim => !anim.trim().startsWith('blink-caret'))
+                                             .join(',');
                     typingText.style.animation = newAnimation;
                 }
             });
@@ -158,12 +164,59 @@ function initializeCardCarousel() {
     const nextButton = carouselContainer.querySelector('.carousel-next');
     const prevButton = carouselContainer.querySelector('.carousel-prev');
     if (!viewport || !track || cards.length === 0 || !nextButton || !prevButton) { if(nextButton) nextButton.style.display = 'none'; if(prevButton) prevButton.style.display = 'none'; return; }
-    const cardsPerPage = 3; let currentPage = 0; const totalCards = cards.length; const totalPages = Math.ceil(totalCards / cardsPerPage);
-    let cardWidth = 0, cardGap = 0; const cardWidthCSS = 250; const cardGapCSSValue = "1.5rem";
-    function calculateDimensions() { if (cards.length > 0) { const trackStyle = window.getComputedStyle(track); cardGap = parseFloat(trackStyle.gap); if (isNaN(cardGap) || cardGap === 0) { cardGap = 24; } cardWidth = cardWidthCSS; if (cardWidth <= 0) console.error("Card width is 0."); } }
-    function updateCarousel() { if (cardWidth <= 0) { calculateDimensions(); if(cardWidth <= 0) return; } const viewportWidth = viewport.offsetWidth; const startIndex = currentPage * cardsPerPage; let cardsOnCurrentPage = Math.min(cardsPerPage, totalCards - startIndex); let currentPageGroupWidth = (cardWidth * cardsOnCurrentPage) + (cardGap * Math.max(0, cardsOnCurrentPage - 1)); let pageStartPosition = (cardWidth * startIndex) + (cardGap * startIndex); let centeringOffset = Math.max(0, (viewportWidth - currentPageGroupWidth) / 2); let moveDistance = pageStartPosition - centeringOffset; const totalTrackWidth = (cardWidth * totalCards) + (cardGap * Math.max(0, totalCards - 1)); const maxTranslateX = Math.max(0, totalTrackWidth - viewportWidth); moveDistance = Math.max(0, Math.min(moveDistance, maxTranslateX)); track.style.transform = `translateX(-${moveDistance}px)`; prevButton.disabled = (currentPage === 0); nextButton.disabled = (currentPage >= totalPages - 1); }
-    nextButton.addEventListener('click', () => { if (currentPage < totalPages - 1) { currentPage++; track.querySelectorAll('.flip-card-inner.is-flipped').forEach(inner => inner.classList.remove('is-flipped')); setTimeout(updateCarousel, 50); } });
-    prevButton.addEventListener('click', () => { if (currentPage > 0) { currentPage--; track.querySelectorAll('.flip-card-inner.is-flipped').forEach(inner => inner.classList.remove('is-flipped')); setTimeout(updateCarousel, 50); } });
+    const cardsPerPage = 3; // Number of cards ideally visible
+    let currentPage = 0; const totalCards = cards.length; const totalPages = Math.ceil(totalCards / cardsPerPage);
+    let cardWidth = 0, cardGap = 0;
+    const cardWidthCSS = 250; // Get from CSS if possible, else hardcode
+    // Get gap from CSS (more robust)
+    function calculateDimensions() {
+        if (cards.length > 0) {
+            const trackStyle = window.getComputedStyle(track);
+            cardGap = parseFloat(trackStyle.gap); // Use gap property
+            if (isNaN(cardGap) || cardGap === 0) { cardGap = 24; } // Fallback if gap is not set or 0 (approx 1.5rem)
+
+            cardWidth = cardWidthCSS; // Assuming fixed width from CSS
+            // Fallback: Get from first card if needed, but fixed width is better
+            // if (cardWidth <= 0) { cardWidth = cards[0].offsetWidth; }
+            if (cardWidth <= 0) console.error("Card width is 0. Cannot update carousel.");
+        }
+    }
+    function updateCarousel() {
+        if (cardWidth <= 0) {
+            calculateDimensions();
+            if(cardWidth <= 0) return; // Still can't calculate
+        }
+        const viewportWidth = viewport.offsetWidth;
+        // Calculate how many cards *actually* fit (useful for responsiveness)
+        // const actualCardsPerPage = Math.max(1, Math.floor((viewportWidth + cardGap) / (cardWidth + cardGap)));
+
+        const startIndex = currentPage * cardsPerPage;
+        // Width of the current "page" group
+        let cardsOnCurrentPage = Math.min(cardsPerPage, totalCards - startIndex);
+        let currentPageGroupWidth = (cardWidth * cardsOnCurrentPage) + (cardGap * Math.max(0, cardsOnCurrentPage - 1));
+
+        // Position of the start of the current page
+        let pageStartPosition = (cardWidth * startIndex) + (cardGap * startIndex);
+
+        // Calculate offset to center the group within the viewport
+        let centeringOffset = Math.max(0, (viewportWidth - currentPageGroupWidth) / 2);
+
+        // Calculate the final translateX value
+        let moveDistance = pageStartPosition - centeringOffset;
+
+        // Ensure we don't translate beyond the bounds of the track
+        const totalTrackWidth = (cardWidth * totalCards) + (cardGap * Math.max(0, totalCards - 1));
+        const maxTranslateX = Math.max(0, totalTrackWidth - viewportWidth);
+        moveDistance = Math.max(0, Math.min(moveDistance, maxTranslateX));
+
+        track.style.transform = `translateX(-${moveDistance}px)`;
+
+        // Update button states
+        prevButton.disabled = (currentPage === 0);
+        nextButton.disabled = (currentPage >= totalPages - 1);
+    }
+    nextButton.addEventListener('click', () => { if (currentPage < totalPages - 1) { currentPage++; track.querySelectorAll('.flip-card-inner.is-flipped').forEach(inner => inner.classList.remove('is-flipped')); setTimeout(updateCarousel, 50); /* Delay update slightly */ } });
+    prevButton.addEventListener('click', () => { if (currentPage > 0) { currentPage--; track.querySelectorAll('.flip-card-inner.is-flipped').forEach(inner => inner.classList.remove('is-flipped')); setTimeout(updateCarousel, 50); /* Delay update slightly */ } });
     cards.forEach((card) => { const cardInner = card.querySelector('.flip-card-inner'); if (cardInner) card.addEventListener('click', () => cardInner.classList.toggle('is-flipped')); });
     let resizeTimer; window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { calculateDimensions(); updateCarousel(); }, 250); });
     calculateDimensions(); updateCarousel();
@@ -192,49 +245,177 @@ function initializeChallengeModals() {
     modal.addEventListener('click', (event) => { if (event.target === modal) closeChallengeModal(); });
 }
 
-// --- Family Tree Tooltip/Line Functionality ---
-function initializeFamilyTreeTooltips() {
-    const container = document.querySelector('.family-tree-container');
-    const tooltip = document.getElementById('family-tooltip');
-    const nodes = document.querySelectorAll('.family-node');
-    const svgLines = container?.querySelector('.family-lines-svg');
-    if (!container || !tooltip || nodes.length === 0 || !svgLines) return;
+// --- Family Tree Tooltip/Line Functionality (Old - REMOVED/COMMENTED for clarity) ---
+// function initializeFamilyTreeTooltips() { ... }
+// function drawFamilyTreeLines() { ... }
 
-    setTimeout(drawFamilyTreeLines, 50); // Draw lines after initial render
 
+// === NEW: Family Member Data ===
+const familyMemberData = {
+    "grandpa-p": {
+        image: "assets/tata.png",
+        title: "Paternal Grandfather",
+        description: "My dad's father. A hardworking provider and the patriarch of the Bermas side."
+    },
+    "grandma-p": {
+        image: "assets/ellen.jpg",
+        title: "Paternal Grandmother",
+        description: "My dad's mother. Known for her kindness and delicious cooking."
+    },
+    "grandpa-m": {
+        image: "assets/tatay.png",
+        title: "Maternal Grandfather",
+        description: "My mom's father. A source of wisdom and quiet strength."
+    },
+    "grandma-m": {
+        image: "assets/rachel.jpg",
+        title: "Maternal Grandmother",
+        description: "My mom's mother. The loving matriarch of the Manzano side, always full of stories."
+    },
+    "dad": {
+        image: "assets/ramon.png",
+        title: "Ramon Bermas (Dad)",
+        description: "My father, an inspiration and my biggest supporter in pursuing my passions."
+    },
+    "mom": {
+        image: "assets/mary.jpg",
+        title: "Mary Chris Manzano (Mom)",
+        description: "My mother, the heart of our family, always encouraging and caring."
+    },
+    "brother": {
+        image: "assets/marc.jpg",
+        title: "Marc Louise Bermas (Older Brother)",
+        description: "My older brother. Paved the way and always looks out for us."
+    },
+    "me": {
+        image: "assets/zild.jpg",
+        title: "Zildjian Bermas (Me)",
+        description: "That's me! Trying to navigate life, studies, and creativity."
+    },
+    "sister": {
+        image: "assets/zian.jpg",
+        title: "Zian Chris Bermas (Younger Sister)",
+        description: "My younger sister. Bright, bubbly, and keeps the family lively."
+    }
+    // Add more entries if you expand the tree
+};
+
+// === NEW: Family Tree Interaction Functionality ===
+function initializeFamilyTreeInteractions() {
+    // Selectors for the main elements
+    const familyContainer = document.querySelector('.family-tree-container');
+    const modal = document.getElementById('family-member-modal');
+
+    // Early exit if container or modal aren't found on the page
+    if (!familyContainer || !modal) {
+         console.log("[DEBUG] Family tree container or modal not found. Skipping initialization.");
+        return;
+    }
+
+    // Select all the clickable/hoverable nodes within the tree
+    const nodes = familyContainer.querySelectorAll('.tree-node');
+    // Select elements inside the modal
+    const modalCloseBtn = modal.querySelector('.modal-close-btn');
+    const modalImage = modal.querySelector('#family-modal-image');
+    const modalTitle = modal.querySelector('#family-modal-title');
+    const modalBody = modal.querySelector('#family-modal-body');
+
+    // Check if modal inner elements exist
+    if (!modalCloseBtn || !modalImage || !modalTitle || !modalBody) {
+        console.error("Required elements within the family modal (#family-member-modal) are missing. Check IDs: #family-modal-image, #family-modal-title, #family-modal-body and class .modal-close-btn");
+        return; // Stop if modal is incomplete
+    }
+
+    // --- Modal Logic ---
+    function openFamilyModal(targetId) {
+        const data = familyMemberData[targetId]; // Get data using the ID from data-modal-target
+        if (!data) {
+            // Handle case where data for the clicked node isn't defined
+            console.warn(`No data found in familyMemberData for modal target: ${targetId}`);
+            modalTitle.textContent = "Information Unavailable";
+            modalImage.src = "assets/default-avatar.png"; // Provide a fallback image path
+            modalImage.alt = "Default image";
+            modalBody.innerHTML = "<p>Details for this family member are not currently available.</p>";
+        } else {
+            // Populate modal with data
+            modalTitle.textContent = data.title || "Family Member"; // Use title or default
+            modalImage.src = data.image || "assets/default-avatar.png"; // Use image or default
+            modalImage.alt = (data.title || "Family member") + " photo";
+            modalBody.innerHTML = `<p>${data.description || 'No description available.'}</p>`; // Use description or default
+        }
+        modal.classList.add('visible'); // Show the modal (uses style.css .visible class)
+    }
+
+    function closeFamilyModal() {
+        modal.classList.remove('visible'); // Hide the modal
+    }
+
+    // Add click listener to each tree node to open the modal
     nodes.forEach(node => {
-        const nodeId = node.id;
-        node.addEventListener('mouseenter', () => {
-            const name = node.dataset.name || 'Unknown'; const info = node.dataset.info || '';
-            tooltip.querySelector('.tooltip-name').textContent = name; tooltip.querySelector('.tooltip-info').textContent = info;
-            const tooltipWidth = tooltip.offsetWidth; const tooltipHeight = tooltip.offsetHeight;
-            let topPos = node.offsetTop - tooltipHeight - 10; let leftPos = node.offsetLeft + (node.offsetWidth / 2) - (tooltipWidth / 2);
-            topPos = Math.max(5, topPos); leftPos = Math.max(5, leftPos); if (leftPos + tooltipWidth > container.offsetWidth - 5) { leftPos = container.offsetWidth - tooltipWidth - 5; }
-            tooltip.style.top = `${topPos}px`; tooltip.style.left = `${leftPos}px`; tooltip.classList.add('visible');
-            svgLines.querySelectorAll('line').forEach(line => { line.classList.toggle('highlight-line', line.dataset.from === nodeId || line.dataset.to === nodeId || line.dataset.from?.includes(nodeId) || line.dataset.to?.includes(nodeId)); });
-        });
-        node.addEventListener('mouseleave', () => {
-            tooltip.classList.remove('visible');
-            svgLines.querySelectorAll('line.highlight-line').forEach(line => line.classList.remove('highlight-line'));
+        node.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent the default '#' link behavior
+            const target = node.dataset.modalTarget; // Get the ID from data-modal-target attribute
+            if (target) {
+                openFamilyModal(target); // Call function to open modal with this ID
+            } else {
+                console.warn("Clicked node is missing data-modal-target attribute", node);
+            }
         });
     });
 
-    let resizeTimer; window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(drawFamilyTreeLines, 250); });
-}
-function drawFamilyTreeLines() {
-    const container = document.querySelector('.family-tree-container'); const svg = container?.querySelector('.family-lines-svg'); if (!container || !svg) return; svg.innerHTML = '';
-    const nodeElements = {}; container.querySelectorAll('.family-node').forEach(node => { nodeElements[node.id] = { el: node, x: node.offsetLeft + node.offsetWidth / 2, y: node.offsetTop + node.offsetHeight / 2, topY: node.offsetTop, bottomY: node.offsetTop + node.offsetHeight }; });
-    const createLine = (x1, y1, x2, y2, fromId = '', toId = '', typeClass = '') => { const line = document.createElementNS('http://www.w3.org/2000/svg', 'line'); line.setAttribute('x1', x1); line.setAttribute('y1', y1); line.setAttribute('x2', x2); line.setAttribute('y2', y2); if (fromId) line.setAttribute('data-from', fromId); if (toId) line.setAttribute('data-to', toId); if (typeClass) line.classList.add(typeClass); svg.appendChild(line); };
-    const gpConnections = [ { pair: ['node-gma-m', 'node-gpa-m'], child: 'node-mother' }, { pair: ['node-gma-p', 'node-gpa-p'], child: 'node-father' } ];
-    gpConnections.forEach(conn => { const gp1 = nodeElements[conn.pair[0]]; const gp2 = nodeElements[conn.pair[1]]; const child = nodeElements[conn.child]; if (gp1 && gp2 && child) { createLine(gp1.x, gp1.y, gp2.x, gp2.y, gp1.el.id, gp2.el.id, 'marriage-line'); const midX = gp1.x + (gp2.x - gp1.x) / 2; const junctionY = gp1.y; const parentTopY = child.y - child.el.offsetHeight / 2; createLine(midX, junctionY, midX, parentTopY - 10, gp1.el.id + "_" + gp2.el.id, child.el.id, 'parent-connector'); createLine(child.x, child.y, child.x, parentTopY - 10, child.el.id, gp1.el.id + "_" + gp2.el.id, 'parent-connector'); } else if (gp1 && child) createLine(gp1.x, gp1.bottomY, child.x, child.topY, gp1.el.id, child.el.id, 'parent-line'); else if (gp2 && child) createLine(gp2.x, gp2.bottomY, child.x, child.topY, gp2.el.id, child.el.id, 'parent-line'); });
-    const mom = nodeElements['node-mother']; const dad = nodeElements['node-father']; const childrenIds = ['node-brother', 'node-me', 'node-sister']; const childrenNodes = childrenIds.map(id => nodeElements[id]).filter(Boolean);
-    if (mom && dad && childrenNodes.length > 0) { createLine(mom.x, mom.y, dad.x, dad.y, mom.el.id, dad.el.id, 'marriage-line'); const parentMidX = mom.x + (dad.x - mom.x) / 2; const parentMidY = mom.y; const childJunctionY = childrenNodes[0].y - childrenNodes[0].el.offsetHeight / 2 - 30; createLine(parentMidX, parentMidY, parentMidX, childJunctionY, mom.el.id + '_' + dad.el.id, 'children', 'child-connector'); let minChildX = childrenNodes[0].x; let maxChildX = childrenNodes[0].x; childrenNodes.forEach(child => { minChildX = Math.min(minChildX, child.x); maxChildX = Math.max(maxChildX, child.x); }); if (childrenNodes.length > 1) { createLine(minChildX, childJunctionY, maxChildX, childJunctionY, 'children-bracket', 'children-bracket', 'child-line'); } childrenNodes.forEach(childNode => { createLine(childNode.x, childJunctionY, childNode.x, childNode.topY, 'children-bracket', childNode.el.id, 'child-line'); }); }
+    // Add listener to the modal's close button
+    modalCloseBtn.addEventListener('click', closeFamilyModal);
+
+    // Add listener to the modal overlay (background) to close it when clicked
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) { // Only close if the click is on the overlay itself
+            closeFamilyModal();
+        }
+    });
+
+    // --- Hover Highlighting Logic ---
+    nodes.forEach(node => {
+        // When mouse enters a node...
+        node.addEventListener('mouseenter', () => {
+            const hoveredNode = node;
+            // Get the group name of the hovered node (e.g., "parents", "siblings", "gp-paternal")
+            const nodeGroup = hoveredNode.dataset.group;
+            // Get the group name of the PARENT group this node belongs to (e.g., "gp-paternal", "parents")
+            const parentGroup = hoveredNode.dataset.childOf;
+
+            // 1. Clear all previous highlights
+            nodes.forEach(n => n.classList.remove('highlight-group'));
+
+            // 2. Highlight the node being hovered over
+            hoveredNode.classList.add('highlight-group');
+
+            // 3. Highlight direct parents: Find nodes whose 'data-group' matches the hovered node's 'data-child-of'
+            if (parentGroup) {
+                const parents = familyContainer.querySelectorAll(`.tree-node[data-group='${parentGroup}']`);
+                parents.forEach(parent => parent.classList.add('highlight-group'));
+            }
+
+            // 4. Highlight direct children: Find nodes whose 'data-child-of' matches the hovered node's 'data-group'
+            if (nodeGroup) {
+                const children = familyContainer.querySelectorAll(`.tree-node[data-child-of='${nodeGroup}']`);
+                children.forEach(child => child.classList.add('highlight-group'));
+            }
+        });
+    });
+
+    // When mouse leaves the entire tree container...
+    familyContainer.addEventListener('mouseleave', () => {
+        // Clear all highlights
+        nodes.forEach(n => n.classList.remove('highlight-group'));
+    });
+
+    console.log("[DEBUG] Family tree interactions initialized successfully."); // Success message
 }
 
 
 // --- Initialize functionality when the DOM is fully loaded ---
 document.addEventListener('DOMContentLoaded', () => {
-    // console.log("DOM Content Loaded. Running initial setups.");
+    // console.log("DOM Content Loaded. Running initial setups."); // Keep or remove
 
     // Common elements
     const hamburgerIcon = document.querySelector("#hamburger-nav .hamburger-icon");
@@ -245,14 +426,54 @@ document.addEventListener('DOMContentLoaded', () => {
     // Page-specific initializations
     if (document.getElementById('web-dev-skills-box')) { setupSkillsPagination('web-dev-skills-box'); }
     if (document.getElementById('graphic-design-skills-box')) { setupSkillsPagination('graphic-design-skills-box'); }
-    // Use the generic modal initializer for both Education and Experience
-    initializeMultiSlideModal('education-box-trigger', 'education-modal');
-    initializeMultiSlideModal('experience-box-trigger', 'experience-modal'); // Initialize Experience modal
-    if (document.getElementById('initial-layer')) { initializeScreenOffTransition(); if (document.querySelector('#real-me-peel .carousel-container')) { initializeCardCarousel(); } }
-    if (document.querySelector('.infinite-gallery-container')) { (async () => { try { const m = await import('./gallery.js'); if (m.initGallery) m.initGallery(); else console.error("initGallery missing"); } catch (e) { console.error("Gallery fail:", e); } })(); }
+
+    // Initialize multi-slide modals if triggers exist
+    if (document.getElementById('education-box-trigger')) { initializeMultiSlideModal('education-box-trigger', 'education-modal'); }
+    if (document.getElementById('experience-box-trigger')) { initializeMultiSlideModal('experience-box-trigger', 'experience-modal'); }
+
+    // Real Me Page specific
+    if (document.getElementById('initial-layer')) {
+        initializeScreenOffTransition();
+        if (document.querySelector('#real-me-peel .carousel-container')) {
+            initializeCardCarousel();
+        }
+    }
+
+    // Gallery Page specific (assuming gallery.js exists and exports initGallery)
+    if (document.querySelector('.infinite-gallery-container')) {
+        (async () => {
+            try {
+                const galleryModule = await import('./gallery.js'); // MAKE SURE gallery.js exists!
+                if (galleryModule && typeof galleryModule.initGallery === 'function') {
+                    galleryModule.initGallery();
+                } else {
+                    console.error("initGallery function not found in gallery.js module.");
+                }
+            } catch (e) {
+                // Ignore error if gallery.js is intentionally missing for some pages
+                if (e.message.includes('Failed to fetch dynamically imported module')) {
+                     console.log("gallery.js not found on this page, skipping gallery init.");
+                } else {
+                    console.error("Failed to load or initialize gallery:", e);
+                }
+            }
+        })();
+    }
+
+    // Challenges Page specific
     if (document.querySelector('.challenge-box')) { initializeChallengeModals(); }
-    if (document.querySelector('.family-tree-container')) { initializeFamilyTreeTooltips(); }
-    if (document.querySelector('.carousel-container') && !document.getElementById('initial-layer')) { initializeCardCarousel(); }
+
+    // --- Family Tree Initialization ---
+    // Check if the main container for the family tree exists on the current page
+    if (document.querySelector('.family-tree-container')) {
+        initializeFamilyTreeInteractions(); // Run the function to set up hover and modal
+        // console.log("[DEBUG] Called initializeFamilyTreeInteractions."); // Optional log
+    }
+
+    // Initialize carousel if on a page without the 'initial-layer' (e.g., not the real-me page)
+    if (document.querySelector('.carousel-container') && !document.getElementById('initial-layer')) {
+        initializeCardCarousel();
+    }
 
 }); // End DOMContentLoaded
 
